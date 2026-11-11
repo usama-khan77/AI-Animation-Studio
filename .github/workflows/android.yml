@@ -9,10 +9,6 @@ jobs:
   build:
     runs-on: ubuntu-latest
 
-    env:
-      ANDROID_HOME: /usr/local/lib/android/sdk
-      ANDROID_SDK_ROOT: /usr/local/lib/android/sdk
-
     steps:
       - name: Download project
         uses: actions/checkout@v4
@@ -23,11 +19,15 @@ jobs:
           distribution: temurin
           java-version: '17'
 
-      - name: Accept licenses and install SDK
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v4
+        with:
+          accept-android-sdk-licenses: 'true'
+          log-accepted-android-sdk-licenses: 'false'
+
+      - name: Install Android packages
         run: |
-          SDKMANAGER="$ANDROID_HOME/cmdline-tools/16.0/bin/sdkmanager"
-          yes | "$SDKMANAGER" --licenses
-          "$SDKMANAGER" "platform-tools" "platforms;android-35" "build-tools;35.0.0"
+          sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
@@ -45,11 +45,10 @@ jobs:
           unzip "$ZIP" -d project
           SETTINGS=$(find project -name 'settings.gradle*' | head -n 1)
           if [ -z "$SETTINGS" ]; then
-            echo "Gradle project not found in ZIP"
+            echo "Gradle project not found"
             exit 1
           fi
-          DIR=$(dirname "$SETTINGS")
-          cd "$DIR"
+          cd "$(dirname "$SETTINGS")"
           gradle assembleDebug
 
       - name: Save APK
@@ -57,4 +56,3 @@ jobs:
         with:
           name: AI-Animation-Studio-APK
           path: '**/build/outputs/apk/debug/*.apk'
-          
