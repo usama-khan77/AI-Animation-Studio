@@ -49,7 +49,7 @@ jobs:
             exit 1
           fi
           cd "$(dirname "$SETTINGS")"
-          sed -i '/^android[[:space:]]*{/a\    compileOptions { sourceCompatibility = JavaVersion.VERSION_17; targetCompatibility = JavaVersion.VERSION_17 }' app/build.gradle.kts
+          
            gradle assembleDebug
 
       - name: Save APK
