@@ -20,7 +20,10 @@ jobs:
           java-version: '17'
 
       - name: Set up Android
-        uses: android-actions/setup-android@v3
+        uses: uses: android-actions/setup-android@v4
+with:
+  accept-android-sdk-licenses: 'true'
+  log-accepted-android-sdk-licenses: 'false'
 
       - name: Install Gradle
         uses: gradle/actions/setup-gradle@v4
