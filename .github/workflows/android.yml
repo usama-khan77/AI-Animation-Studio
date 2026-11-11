@@ -1,4 +1,3 @@
-
 name: Build Android APK
 
 on:
@@ -21,39 +20,22 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v4
-        with:
-          accept-android-sdk-licenses: 'true'
-          log-accepted-android-sdk-licenses: 'false'
 
       - name: Install Android packages
-        run: |
-          sdkmanager "platforms;android-35" "build-tools;35.0.0"
+        run: sdkmanager "platforms;android-35" "build-tools;35.0.0"
 
       - name: Set up Gradle
         uses: gradle/actions/setup-gradle@v4
         with:
           gradle-version: '8.9'
 
-      - name: Extract and build APK
+      - name: Build APK
         run: |
-          mkdir project
-          ZIP=$(find . -maxdepth 1 -iname '*.zip' | head -n 1)
-          if [ -z "$ZIP" ]; then
-            echo "Project ZIP not found"
-            exit 1
-          fi
-          unzip "$ZIP" -d project
-          SETTINGS=$(find project -name 'settings.gradle*' | head -n 1)
-          if [ -z "$SETTINGS" ]; then
-            echo "Gradle project not found"
-            exit 1
-          fi
-          cd "$(dirname "$SETTINGS")"
-          
-           gradle assembleDebug
+          cd AI-Animation-Studio
+          gradle assembleDebug
 
       - name: Save APK
         uses: actions/upload-artifact@v4
         with:
           name: AI-Animation-Studio-APK
-          path: '**/build/outputs/apk/debug/*.apk'
+          path: AI-Animation-Studio/app/build/outputs/apk/debug/*.apk
