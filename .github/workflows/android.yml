@@ -38,4 +38,4 @@ jobs:
         uses: actions/upload-artifact@v4
         with:
           name: AI-Animation-Studio-APK
-          path: AI-Animation-Studio/app/build/outputs/apk/debug/*.apk
+          path: AI-Animation-Studio/AI-Animation-Studio/AI-Animation-Studio/app/build/outputs/apk/debug/*.apk
