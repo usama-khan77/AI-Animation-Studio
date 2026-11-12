@@ -8,7 +8,7 @@ android {
     sourceSets {
     main {
         manifest.srcFile 'AI-Animation-Studio/app/src/main/AndroidManifest.xml'
-        java.srcDirs = ['AI-Animation-Studio/app/src/main/java']
+        java.srcDirs = ['AI-Animation-Studio/app/src/main/AI-Animation-Studio/app/src/main/java']
     }
     }
 
