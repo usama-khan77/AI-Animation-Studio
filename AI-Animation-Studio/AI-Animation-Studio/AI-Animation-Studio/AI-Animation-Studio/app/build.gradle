@@ -5,6 +5,12 @@ plugins {
 android {
     namespace 'com.usama.aianimationstudio'
     compileSdk 35
+    sourceSets {
+    main {
+        manifest.srcFile 'AI-Animation-Studio/app/src/main/AndroidManifest.xml'
+        java.srcDirs = ['AI-Animation-Studio/app/src/main/java']
+    }
+    }
 
     defaultConfig {
         applicationId 'com.usama.aianimationstudio'
