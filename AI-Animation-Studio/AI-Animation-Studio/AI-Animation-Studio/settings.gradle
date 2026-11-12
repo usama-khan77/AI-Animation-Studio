@@ -16,3 +16,4 @@ dependencyResolutionManagement {
 
 rootProject.name = "AIAnimationStudio"
 include(":app")
+project(":app").projectDir = file("AI-Animation-Studio/app")
