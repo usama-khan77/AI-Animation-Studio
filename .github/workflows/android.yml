@@ -31,7 +31,7 @@ jobs:
 
       - name: Build APK
         run: |
-          cd AI-Animation-Studio
+          cd AI-Animation-Studio/AI-Animation-Studio/AI-Animation-Studio
           gradle assembleDebug
 
       - name: Save APK
